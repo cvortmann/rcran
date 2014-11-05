@@ -1,0 +1,30 @@
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec)
+
+task :default => :spec
+
+namespace :packages do
+  require './jobs/get_package_names_and_versions_job'
+  Mongoid.load!("config/mongoid.yml", :development)
+
+  desc "Download package list and store them in the db"
+  task :download do
+    GetPackageNamesAndVersionsJob.new.run
+  end
+
+  desc "scheduled download"
+  task :job do
+    require 'rufus-scheduler'
+
+    scheduler = Rufus::Scheduler.new
+
+    scheduler.cron "0 12 * * *" do
+      puts "Downloading and saving packages"
+      GetPackageNamesAndVersionsJob.new.run
+      puts "Saving packages done!"
+    end
+
+    scheduler.join
+  end
+end
