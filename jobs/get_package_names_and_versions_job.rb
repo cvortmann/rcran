@@ -7,8 +7,6 @@ class GetPackageNamesAndVersionsJob
     downloader = PackageListDownloader.new
     versions = PackageListParser.new(downloader).parse
 
-    limit = ENV["NUMBER_OF_PACKAGES"] || versions.size
-
-    VersionSaver.new(versions, limit.to_i).save
+    VersionSaver.new(versions).save
   end
 end

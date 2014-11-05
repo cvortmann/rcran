@@ -16,13 +16,5 @@ describe GetPackageNamesAndVersionsJob do
 
       expect(Version.count).to eq(3)
     end
-
-    it "saves only the number of packages set by the environment variable" do
-      ENV['NUMBER_OF_PACKAGES'] = "2"
-
-      job.run
-
-      expect(Version.count).to eq(2)
-    end
   end
 end
