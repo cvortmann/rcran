@@ -5,8 +5,8 @@ require './entities/version_saver'
 class GetPackageNamesAndVersionsJob
   def run
     downloader = PackageListDownloader.new
-    versions = PackageListParser.new(downloader).parse
+    list_of_packages = PackageListParser.new(downloader).parse
 
-    VersionSaver.new(versions).save
+    VersionSaver.new(list_of_packages).save
   end
 end

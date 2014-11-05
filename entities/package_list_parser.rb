@@ -6,6 +6,9 @@ class PackageListParser
   end
 
   def parse
-    Dcf.parse(@downloader.download)
+    @downloader.download.split("\n\n").map do |package|
+      parsed = Dcf.parse(package).first
+      { name: parsed["Package"], number: parsed["Version"] }
+    end
   end
 end

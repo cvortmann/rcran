@@ -6,7 +6,7 @@ describe VersionSaver do
 
   describe "#save" do
     context "when list has only one version" do
-      let(:list_of_packages) { [{ "Package" => "foo", "Version" => "1.0" }] }
+      let(:list_of_packages) { [{ name: "foo", number: "1.0" }] }
 
       context "when the package does not exist yet" do
         it "saves one version" do
@@ -34,8 +34,8 @@ describe VersionSaver do
     context "when list has more than one version" do
       let(:list_of_packages) do
         [
-          { "Package" => "foo", "Version" => "1.0" },
-          { "Package" => "bar", "Version" => "2.0" }
+          { name: "foo", number: "1.0" },
+          { name: "bar", number: "2.0" }
         ]
       end
 
