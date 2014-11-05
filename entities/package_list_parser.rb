@@ -6,6 +6,6 @@ class PackageListParser
   end
 
   def parse
-    Dcf.parse(@downloader.download.read)
+    Dcf.parse(@downloader.download)
   end
 end

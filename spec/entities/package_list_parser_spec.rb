@@ -2,7 +2,7 @@ require './spec/spec_helper'
 require './entities/package_list_parser'
 
 describe PackageListParser do
-  let(:file)       { File.open("./spec/files/PACKAGES") }
+  let(:file)       { File.read("./spec/files/PACKAGES")  }
   let(:downloader) { double(:downloader, download: file) }
   let(:parser) { described_class.new(downloader) }
 

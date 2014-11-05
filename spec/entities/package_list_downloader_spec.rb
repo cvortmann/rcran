@@ -6,8 +6,11 @@ describe PackageListDownloader do
   let(:uri) { double }
 
   it "call cran website to get the list of packages" do
-    expect(URI).to receive(:parse).with("http://cran.r-project.org/src/contrib/PACKAGES").and_return(uri)
-    expect(uri).to receive(:open).and_return(:downloaded_list)
+    expect(URI).to receive(:parse)
+                   .with("http://cran.r-project.org/src/contrib/PACKAGES")
+                   .and_return(uri)
+    expect(uri).to receive(:open)
+                   .and_return(double(:io_object, read: :downloaded_list))
     expect(downloader.download).to eq(:downloaded_list)
   end
 end
