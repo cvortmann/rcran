@@ -60,5 +60,37 @@ DESCRIPTION
         expect(unpacker.unpack).to eq(description_contents)
       end
     end
+
+    context "when tar_gz contain a DESCRIPTION file with a extension" do
+      let(:tar_gz) { File.open("./spec/files/lda_1.3.2.tar.gz") }
+
+      it "should return the DESCRIPTION file inside the tar.gz file" do
+        description_contents = <<DESCRIPTION
+Package: lda
+Type: Package
+Title: Collapsed Gibbs sampling methods for topic models.
+Version: 1.3.2
+Date: 2012-05-22
+Author: Jonathan Chang
+Maintainer: Jonathan Chang <jonchang@fb.com>
+Description: This package implements latent Dirichlet allocation (LDA)
+        and related models.  This includes (but is not limited to)
+        sLDA, corrLDA, and the mixed-membership stochastic blockmodel.
+        Inference for all of these models is implemented via a fast
+        collapsed Gibbs sampler writtten in C.  Utility functions for
+        reading/writing data typically used in topic models, as well as
+        tools for examining posterior distributions are also included.
+License: LGPL
+LazyLoad: yes
+Suggests: Matrix, reshape2, ggplot2 (>= 0.9.1), penalized
+Packaged: 2012-10-14 02:29:36 UTC; jonchang
+Depends: R (>= 2.10)
+Repository: CRAN
+Date/Publication: 2012-10-14 06:49:32
+DESCRIPTION
+
+        expect(unpacker.unpack).to eq(description_contents)
+      end
+    end
   end
 end
