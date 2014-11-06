@@ -9,7 +9,7 @@ class DescriptionFileUnpacker
   def unpack
     Zlib::GzipReader.open(@tar_gz) do |gz|
       tar_extract = Gem::Package::TarReader.new(gz)
-      tar_extract.find { |f| f.full_name =~ /DESCRIPTION/ }.read
+      tar_extract.find { |f| f.full_name =~ /\/DESCRIPTION/ }.read
     end
   end
 end
