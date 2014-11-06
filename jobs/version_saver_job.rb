@@ -11,6 +11,11 @@ class VersionSaverJob
   def run
     tar_gz = TarGzDownloader.new(@package).download
     description_file = DescriptionFileUnpacker.new(tar_gz).unpack
-    Version.create(DescriptionFileParser.new(description_file).parse)
+    parsed_file = DescriptionFileParser.new(description_file).parse
+
+    begin
+      Version.create(parsed_file)
+    rescue Encoding::UndefinedConversionError
+    end
   end
 end
