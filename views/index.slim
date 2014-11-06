@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title RCran Packages
+  body
+    - @all.each do |package_name, versions|
+      h2 Package: #{package_name}
+      - versions.each do |version|
+        ul
+          li
+            p = version.number
+
+            p
+              strong> Title:
+              | #{version.title}
+            p
+              strong> Description:
+              | #{version.description}
+            p
+              strong> Author:
+              | #{version.author}
+            p
+              strong> Maintainer:
+              | #{version.maintainer}
+            p
+              strong> Date of Publication:
+              | #{version.date_of_publication}

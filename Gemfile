@@ -8,6 +8,8 @@ gem 'mongoid'
 gem "bson_ext", "1.1.5"
 gem "puma"
 
+gem "slim"
+
 group :test do
   gem "rspec"
   gem "database_cleaner"
