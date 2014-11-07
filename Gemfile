@@ -9,6 +9,7 @@ gem "bson_ext", "1.1.5"
 gem "puma"
 
 gem "slim"
+gem "celluloid"
 
 group :test do
   gem "rspec"

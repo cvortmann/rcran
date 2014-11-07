@@ -10,6 +10,12 @@ class DownloadVersionsJob
 
     filtered_list = PackageListFilter.new(list_of_packages).remove_existing_versions
 
-    filtered_list.each { |package| VersionSaverJob.new(package).run }
+    pool = VersionSaverJob.pool
+
+    filtered_list.each { |package| pool.async.run(package) }
+
+    until pool.busy_size == 0
+      sleep 1
+    end
   end
 end

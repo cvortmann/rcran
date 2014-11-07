@@ -3,7 +3,7 @@ require './jobs/version_saver_job'
 
 describe VersionSaverJob do
   let(:package) { { name: 'x', version: '1.0'} }
-  let(:job)     { described_class.new(package) }
+  let(:job)     { described_class.new }
   let(:name)    { "A3" }
   let(:version_to_be_saved) do
     {
@@ -24,7 +24,7 @@ describe VersionSaverJob do
   end
 
   it "should save parsed version to db" do
-    job.run
+    job.run(package)
 
     version = Version.first
     expect(version.name).to                eq("A3")
@@ -40,7 +40,7 @@ describe VersionSaverJob do
     let(:name) { "\xE9".force_encoding(Encoding::ASCII_8BIT) }
 
     it "should not save parsed" do
-      job.run
+      job.run(package)
       expect(Version.count).to eq(0)
     end
   end

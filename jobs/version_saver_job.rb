@@ -2,14 +2,13 @@ require './entities/tar_gz_downloader'
 require './entities/description_file_unpacker'
 require './entities/description_file_parser'
 require './entities/version'
+require 'celluloid'
 
 class VersionSaverJob
-  def initialize(package)
-    @package = package
-  end
+  include Celluloid
 
-  def run
-    tar_gz = TarGzDownloader.new(@package).download
+  def run(package)
+    tar_gz = TarGzDownloader.new(package).download
     description_file = DescriptionFileUnpacker.new(tar_gz).unpack
     parsed_file = DescriptionFileParser.new(description_file).parse
 
