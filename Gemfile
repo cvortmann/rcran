@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "rake"
+gem "foreman"
 gem "treetop-dcf"
 gem "rufus-scheduler"
 gem "sinatra"
