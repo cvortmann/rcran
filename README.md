@@ -6,7 +6,11 @@ To start the server:
     $ foreman start
 
 The server runs at http://localhost:9292.
-Another process runs a scheduled download of versions that happen every day at 12:00.
+Another process runs a scheduled download of packages that happen every day at 12:00.
+
+To download packages outside of the scheduled time:
+
+    $ bundle exec rake packages:download
 
 ## Dependencies
 
