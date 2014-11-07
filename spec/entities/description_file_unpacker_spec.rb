@@ -92,5 +92,42 @@ DESCRIPTION
         expect(unpacker.unpack).to eq(description_contents)
       end
     end
+
+    context "when tar_gz contain a DESCRIPTION in a inner folder" do
+      let(:tar_gz) { File.open("./spec/files/devtools_1.6.1.tar.gz") }
+
+      it "should return the DESCRIPTION file inside the tar.gz file" do
+        description_contents = <<DESCRIPTION
+Package: devtools
+Title: Tools to make developing R code easier
+Version: 1.6.1
+Authors@R: as.person(c(
+    "Hadley Wickham <hadley@rstudio.com> [aut, cre]",
+    "Winston Chang [aut]",
+    "RStudio [cph]",
+    "R Core team [ctb] (Some namespace and vignette code extracted from base R)"
+    ))
+Description: Collection of package development tools.
+Depends: R (>= 3.0.2)
+Imports: httr (>= 0.4), RCurl, utils, tools, methods, memoise, whisker,
+        evaluate, digest, rstudioapi, jsonlite
+Suggests: testthat (>= 0.7), roxygen2 (>= 4.0.2), BiocInstaller, Rcpp
+        (>= 0.10.0), MASS, rmarkdown, knitr
+License: GPL (>= 2)
+Packaged: 2014-10-07 18:36:53 UTC; hadley
+Author: Hadley Wickham [aut, cre],
+  Winston Chang [aut],
+  RStudio [cph],
+  R Core team [ctb] (Some namespace and vignette code extracted from base
+    R)
+Maintainer: Hadley Wickham <hadley@rstudio.com>
+NeedsCompilation: yes
+Repository: CRAN
+Date/Publication: 2014-10-07 22:06:39
+DESCRIPTION
+
+        expect(unpacker.unpack).to eq(description_contents)
+      end
+    end
   end
 end
