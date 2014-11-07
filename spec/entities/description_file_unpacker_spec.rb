@@ -129,5 +129,32 @@ DESCRIPTION
         expect(unpacker.unpack).to eq(description_contents)
       end
     end
+
+    context "when tar_gz contain a DESCRIPTION" do
+      let(:tar_gz) { File.open("./spec/files/complex.surv.dat.sim_2.0.0.tar.gz") }
+
+      it "should return the DESCRIPTION file inside the tar.gz file" do
+        description_contents = <<DESCRIPTION
+Package: complex.surv.dat.sim
+Type: Package
+Title: Simulation of complex survival data
+Version: 2.0.0
+Date: 2013-08-14
+Encoding: latin1
+Author: David Mori\xF1a, Centre Tecnol\xF2gic de Nutrici\xF3 i Salut and Albert Navarro, Universitat Aut\xF2noma de Barcelona
+Maintainer: David Mori\xF1a <david.morina@ctns.cat>
+Description: Simulation of complex survival data
+Depends: R (>= 2.13.1), eha, statmod
+Repository: CRAN
+License: GPL (>= 2)
+LazyLoad: yes
+Packaged: 2013-08-14 15:46:52 UTC; dmorinya
+NeedsCompilation: no
+Date/Publication: 2013-08-14 17:59:29
+DESCRIPTION
+
+        expect(unpacker.unpack).to eq(description_contents.force_encoding(Encoding::ASCII_8BIT))
+      end
+    end
   end
 end
