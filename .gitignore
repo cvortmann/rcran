@@ -1,4 +1,4 @@
 .env
 .rspec
 tmp
-log
+log/*.log
