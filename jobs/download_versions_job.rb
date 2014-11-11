@@ -2,6 +2,7 @@ require './entities/package_list_downloader'
 require './entities/package_list_parser'
 require './entities/package_list_filter'
 require './jobs/version_saver_job'
+require 'celluloid/autostart'
 
 class DownloadVersionsJob
   def run
@@ -12,10 +13,6 @@ class DownloadVersionsJob
 
     pool = VersionSaverJob.pool
 
-    filtered_list.each { |package| pool.async.run(package) }
-
-    until pool.busy_size == 0
-      sleep 1
-    end
+    filtered_list.map { |package| pool.future.run(package) }.map(&:value)
   end
 end
