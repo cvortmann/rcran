@@ -8,11 +8,8 @@ class DownloadVersionsJob
   def run
     downloader = PackageListDownloader.new
     list_of_packages = PackageListParser.new(downloader).parse
-
     filtered_list = PackageListFilter.new(list_of_packages).remove_existing_versions
-
-    pool = VersionSaverJob.pool
-
+    pool = VersionSaverJob.pool(size: 40)
     filtered_list.map { |package| pool.future.run(package) }.map(&:value)
   end
 end

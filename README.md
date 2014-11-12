@@ -81,4 +81,14 @@ Some basic benchmarks (using Ruby's Benchmark: [http://www.ruby-doc.org/stdlib-2
         <td>42.829641</td>
         <td>Download the PACKAGES file and try to download the packages that were not in db (roughly 70 packages).</td>
     </tr>
+    <tr>
+        <td>Celluloid with pool size 40</td>
+        <td>534.553323</td>
+        <td>Download 5984 packages.</td>
+    </tr>
+    <tr>
+        <td>Celluloid with pool size 40</td>
+        <td>41.448202</td>
+        <td>Download the PACKAGES file and try to download the packages that were not in db (roughly 70 packages).</td>
+    </tr>
 </table>
