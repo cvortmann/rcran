@@ -21,7 +21,7 @@ namespace :packages do
 
     scheduler.cron "0 12 * * *" do
       puts "Downloading and saving packages"
-      DownloadVersionsJob.new.run
+      Rake::Task["packages:download"].execute
       puts "Saving packages done!"
     end
 
